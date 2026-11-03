@@ -57,10 +57,12 @@ class PeminjamanController extends Controller
             $parameter = [];
 
             if ($q !== '') {
-                $sql .= ' AND (p.kode_peminjaman LIKE :kata_kunci
-                             OR p.nama_peminjam LIKE :kata_kunci
-                             OR p.nomor_identitas LIKE :kata_kunci)';
-                $parameter[':kata_kunci'] = '%'.$q.'%';
+                $sql .= ' AND (p.kode_peminjaman LIKE :kode
+                             OR p.nama_peminjam LIKE :nama
+                             OR p.nomor_identitas LIKE :identitas)';
+                $parameter[':kode'] = '%'.$q.'%';
+                $parameter[':nama'] = '%'.$q.'%';
+                $parameter[':identitas'] = '%'.$q.'%';
             }
 
             if ($alatId !== null) {
@@ -408,7 +410,7 @@ class PeminjamanController extends Controller
             $parameter['q'] = $q;
         }
 
-        $alatId = $request->input('alat_id');
+        $alatId = $request->input('filter_alat_id');
         if ($alatId !== null && $alatId !== '') {
             $parameter['alat_id'] = (int) $alatId;
         }
@@ -430,7 +432,7 @@ class PeminjamanController extends Controller
             $parameter['q'] = $q;
         }
 
-        $alatId = $request->input('alat_id');
+        $alatId = $request->input('filter_alat_id');
         if ($alatId !== null && $alatId !== '') {
             $parameter['alat_id'] = (int) $alatId;
         }
